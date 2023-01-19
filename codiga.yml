@@ -2,4 +2,4 @@ rulesets:
   - typescript-templates
   - typescript-best-practices
   - js-rules
-  - js-templates
+  - javascript-templates

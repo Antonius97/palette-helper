@@ -1,4 +1,3 @@
-// @ts-nocheck
 export function HSL2RGB(h, s, l) {
   // Must be fractions of 1
   s /= 100;

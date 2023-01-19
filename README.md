@@ -1,3 +1,6 @@
+[![Code Grade](https://api.codiga.io/project/35477/score/svg)](https://www.codiga.io)
+
+
 # Svelte + Vite
 
 This template should help get you started developing with Svelte in Vite.

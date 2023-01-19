@@ -1,7 +1,9 @@
 /**
- * @param {number} h
- * @param {number} s
- * @param {number} l
+ * It takes in a hue, saturation, and lightness value and returns a string of the rgb value
+ * @param {number} h - Hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue.
+ * @param {number} s - saturation (0-100)
+ * @param {number} l - lightness
+ * @returns A string of rgb values
  */
 export function HSL2RGB(h, s, l) {
   // Must be fractions of 1
@@ -47,10 +49,14 @@ export function HSL2RGB(h, s, l) {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
+
 /**
- * @param {number} h
- * @param {number} s
- * @param {number} l
+ * It takes in three numbers, representing the hue, saturation, and lightness of a color, and returns a
+ * string representing the hexadecimal value of that color
+ * @param {number} h - The hue of the color. This is a number between 0 and 360.
+ * @param {number} s - saturation (0-100)
+ * @param {number} l - lightness
+ * @returns the hexadecimal value of the color.
  */
 export function HSL2HEX(h, s, l) {
   s /= 100;
@@ -105,9 +111,14 @@ export function HSL2HEX(h, s, l) {
 }
 
 /**
- * @param {number} h
- * @param {number} s
- * @param {number} l
+ * Convert HSL to RGB, then convert RGB to object.
+ * 
+ * The first part of the function is the HSL to RGB conversion. The second part is the RGB to
+ * object conversion
+ * @param {number} h - Hue (0-360)
+ * @param {number} s - saturation (0-100)
+ * @param {number} l - lightness
+ * @returns An object with the properties r, g, and b.
  */
 export function HSL2RGBO(h, s, l) {
   s /= 100;
@@ -158,54 +169,52 @@ export function HSL2RGBO(h, s, l) {
 }
 
 
-//For parsing input value
+
 /**
- * @param {string | any[]} H
+ * It takes a hex color and returns an object with the hue, saturation, and lightness values
+ * @param H - The hexadecimal color value.
+ * @returns An object with the properties h, s, and l.
  */
 export function HEX2HSL(H) {
-  // Convert hex to RGB first
-  let r = 0,
-    g = 0,
-    b = 0;
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(H);
 
-  let cmin = Math.min(r, g, b),
-    cmax = Math.max(r, g, b),
-    delta = cmax - cmin,
-    h = 0,
-    s = 0,
-    l = 0;
+  let r = parseInt(result[1], 16);
+  let g = parseInt(result[2], 16);
+  let b = parseInt(result[3], 16);
 
-  if (delta === 0)
-    h = 0;
-  else if (cmax === r)
-    h = ((g - b) / delta) % 6;
-  else if (cmax === g)
-    h = (b - r) / delta + 2;
-  else
-    h = (r - g) / delta + 4;
+  r /= 255, g /= 255, b /= 255;
 
-  h = Math.round(h * 60);
+  let max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
 
-  if (h < 0)
-    h += 360;
+  if (max == min) {
+    h = s = 0; // achromatic
+  } else {
+    let d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
-  l = (cmax + cmin) / 2;
-  s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-  s = +(s * 100).toFixed(1);
-  l = +(l * 100).toFixed(1);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
 
+    h /= 6;
+  }
   return {
     h,
     s,
     l
-  };
+  }
 }
 
 
 /**
- * @param {string | number | any[]} r
- * @param {string | number | any[]} g
- * @param {string | number | any[]} b
+ * It takes three numbers, converts them to hexadecimal, and returns the result
+ * @param r - The red value of the color, from 0 to 255.
+ * @param g - The green value of the color.
+ * @param b - The blue value of the color, from 0 to 255.
+ * @returns A hexadecimal color code.
  */
 export function RGBO2HEX(r, g, b) {
   r = r.toString(16);

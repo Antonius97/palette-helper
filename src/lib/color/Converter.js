@@ -1,20 +1,12 @@
 /**
- * @param {number} s
- * @param {number} [l]
- */
-function normSL(s, l) {
-  return [s / 100, l / 100];
-}
-
-
-/**
  * @param {number} h
  * @param {number} s
  * @param {number} l
  */
 export function HSL2RGB(h, s, l) {
   // Must be fractions of 1
-  [s, l] = normSL(s, l);
+  s /= 100;
+  l /= 100;
 
   let c = (1 - Math.abs(2 * l - 1)) * s,
     x = c * (1 - Math.abs((h / 60) % 2 - 1)),
@@ -61,7 +53,8 @@ export function HSL2RGB(h, s, l) {
  * @param {number} l
  */
 export function HSL2HEX(h, s, l) {
-  [s, l] = normSL(s, l);
+  s /= 100;
+  l /= 100;
 
   let c = (1 - Math.abs(2 * l - 1)) * s,
     x = c * (1 - Math.abs((h / 60) % 2 - 1)),
@@ -117,7 +110,8 @@ export function HSL2HEX(h, s, l) {
  * @param {number} l
  */
 export function HSL2RGBO(h, s, l) {
-  [s, l] = normSL(s, l);
+  s /= 100;
+  l /= 100;
 
   let c = (1 - Math.abs(2 * l - 1)) * s,
     x = c * (1 - Math.abs((h / 60) % 2 - 1)),

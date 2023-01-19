@@ -1,3 +1,8 @@
+/**
+ * @param {number} h
+ * @param {number} s
+ * @param {number} l
+ */
 export function HSL2RGB(h, s, l) {
   // Must be fractions of 1
   s /= 100;
@@ -42,6 +47,11 @@ export function HSL2RGB(h, s, l) {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
+/**
+ * @param {number} h
+ * @param {number} s
+ * @param {number} l
+ */
 export function HSL2HEX(h, s, l) {
   s /= 100;
   l /= 100;
@@ -79,21 +89,26 @@ export function HSL2HEX(h, s, l) {
     b = x;
   }
   // Having obtained RGB, convert channels to hex
-  r = Math.round((r + m) * 255).toString(16);
-  g = Math.round((g + m) * 255).toString(16);
-  b = Math.round((b + m) * 255).toString(16);
+  let rS = Math.round((r + m) * 255).toString(16);
+  let gS = Math.round((g + m) * 255).toString(16);
+  let bS = Math.round((b + m) * 255).toString(16);
 
   // Prepend 0s, if necessary
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
+  if (rS.length === 1)
+    rS = "0" + rS;
+  if (gS.length === 1)
+    gS = "0" + gS;
+  if (bS.length === 1)
+    bS = "0" + bS;
 
   return ("#" + r + g + b).toUpperCase();
 }
 
+/**
+ * @param {number} h
+ * @param {number} s
+ * @param {number} l
+ */
 export function HSL2RGBO(h, s, l) {
   s /= 100;
   l /= 100;
@@ -144,24 +159,15 @@ export function HSL2RGBO(h, s, l) {
 
 
 //For parsing input value
+/**
+ * @param {string | any[]} H
+ */
 export function HEX2HSL(H) {
   // Convert hex to RGB first
   let r = 0,
     g = 0,
     b = 0;
-  if (H.length == 4) {
-    r = "0x" + H[1] + H[1];
-    g = "0x" + H[2] + H[2];
-    b = "0x" + H[3] + H[3];
-  } else if (H.length == 7) {
-    r = "0x" + H[1] + H[2];
-    g = "0x" + H[3] + H[4];
-    b = "0x" + H[5] + H[6];
-  }
-  // Then to HSL
-  r /= 255;
-  g /= 255;
-  b /= 255;
+
   let cmin = Math.min(r, g, b),
     cmax = Math.max(r, g, b),
     delta = cmax - cmin,
@@ -169,11 +175,11 @@ export function HEX2HSL(H) {
     s = 0,
     l = 0;
 
-  if (delta == 0)
+  if (delta === 0)
     h = 0;
-  else if (cmax == r)
+  else if (cmax === r)
     h = ((g - b) / delta) % 6;
-  else if (cmax == g)
+  else if (cmax === g)
     h = (b - r) / delta + 2;
   else
     h = (r - g) / delta + 4;
@@ -184,7 +190,7 @@ export function HEX2HSL(H) {
     h += 360;
 
   l = (cmax + cmin) / 2;
-  s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+  s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
   s = +(s * 100).toFixed(1);
   l = +(l * 100).toFixed(1);
 
@@ -196,17 +202,22 @@ export function HEX2HSL(H) {
 }
 
 
+/**
+ * @param {string | number | any[]} r
+ * @param {string | number | any[]} g
+ * @param {string | number | any[]} b
+ */
 export function RGBO2HEX(r, g, b) {
   r = r.toString(16);
   g = g.toString(16);
   b = b.toString(16);
 
   // Prepend 0s, if necessary
-  if (r.length == 1)
+  if (r.length === 1)
     r = "0" + r;
-  if (g.length == 1)
+  if (g.length === 1)
     g = "0" + g;
-  if (b.length == 1)
+  if (b.length === 1)
     b = "0" + b;
 
   return ("#" + r + g + b).toUpperCase();

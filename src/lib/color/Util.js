@@ -24,11 +24,19 @@ export function normHSL(color) {
   };
 }
 
-export function getTextColorFor(color) {
+/**
+ * Get the text color for a given color.
+ * @param {Object} color - The color to get the text color for.
+ * @param {number} color.h - The hue of the color.
+ * @param {number} color.s - The saturation of the color.
+ * @param {number} color.l - The brightness of the color.
+ * @returns {{ h: number, s: number, l: number }} The text color.
+ */
+export function getTextColorFor(color, diff = 75) {
   return {
     h: color.h,
     s: (color.s && Math.min(color.s + 35, 100)) || 0,
-    l: color.l < 50 ? Math.min(color.l + 45, 100) : Math.max(color.l - 55, 0)
+    l: color.l < 50 ? Math.min(color.l + diff, 100) : Math.max(color.l - diff, 0)
   }
 }
 

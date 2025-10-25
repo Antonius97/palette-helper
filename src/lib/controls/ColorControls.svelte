@@ -32,6 +32,7 @@
   <PaletteColors />
 
   <p class="controls-section-title">Predefined Colors</p>
+  <p class="note__text">You can hover over +N to see the additional descriptions</p>
   <ColorLibrary />
 </ControlsBase>
 
@@ -45,5 +46,9 @@
 
   .controls-section-title {
     margin-top: 3rem;
+  }
+
+  .note__text {
+    margin-top: 0.25rem;
   }
 </style>

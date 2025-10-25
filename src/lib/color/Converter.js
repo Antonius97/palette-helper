@@ -1,11 +1,17 @@
 /**
  * It takes in a hue, saturation, and lightness value and returns a string of the rgb value
- * @param {number} h - Hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue.
+ * @param {number | Object} h - Hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue. or an object with the properties h, s, and l.
  * @param {number} s - saturation (0-100)
  * @param {number} l - lightness
  * @returns A string of rgb values
  */
 export function HSL2RGB(h, s, l) {
+  if (typeof h === 'object') {
+    s = h.s;
+    l = h.l;
+    h = h.h;
+  }
+
   // Must be fractions of 1
   s /= 100;
   l /= 100;
@@ -53,12 +59,18 @@ export function HSL2RGB(h, s, l) {
 /**
  * It takes in three numbers, representing the hue, saturation, and lightness of a color, and returns a
  * string representing the hexadecimal value of that color
- * @param {number} h - The hue of the color. This is a number between 0 and 360.
+ * @param {number | Object} h - The hue of the color. This is a number between 0 and 360. or an object with the properties h, s, and l.
  * @param {number} s - saturation (0-100)
  * @param {number} l - lightness
  * @returns the hexadecimal value of the color.
  */
-export function HSL2HEX(h, s, l) {
+export function HSL2HEX(h = 0, s = 0, l = 0) {
+  if (typeof h === 'object') {
+    s = h.s;
+    l = h.l;
+    h = h.h;
+  }
+
   s /= 100;
   l /= 100;
 
@@ -107,7 +119,7 @@ export function HSL2HEX(h, s, l) {
   if (bS.length === 1)
     bS = "0" + bS;
 
-  return ("#" + r + g + b).toUpperCase();
+  return ("#" + rS + gS + bS).toUpperCase();
 }
 
 /**
@@ -115,12 +127,18 @@ export function HSL2HEX(h, s, l) {
  * 
  * The first part of the function is the HSL to RGB conversion. The second part is the RGB to
  * object conversion
- * @param {number} h - Hue (0-360)
+ * @param {number | Object} h - Hue (0-360) or an object with the properties h, s, and l.
  * @param {number} s - saturation (0-100)
  * @param {number} l - lightness
  * @returns An object with the properties r, g, and b.
  */
-export function HSL2RGBO(h, s, l) {
+export function HSL2RGBO(h = 0, s = 0, l = 0) {
+  if (typeof h === 'object') {
+    s = h.s;
+    l = h.l;
+    h = h.h;
+  }
+
   s /= 100;
   l /= 100;
 
@@ -168,7 +186,54 @@ export function HSL2RGBO(h, s, l) {
   };
 }
 
+/**
+ * It r, g, b values and returns an object with the hue, saturation, and lightness values
+ * @param r - The red value of the color, from 0 to 255.
+ * @param g - The green value of the color.
+ * @param b - The blue value of the color, from 0 to 255.
+ * @returns An object with the properties h, s, and l.
+ */
+export function RGBO2HSL(r = 0, g = 0, b = 0) {
+  r /= 255, g /= 255, b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
 
+  if (max == min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+
+  return {
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100)
+  }
+}
+
+/**
+ * It takes a hex color and returns an object with the red, green, and blue values
+ * @param H - The hexadecimal color value.
+ * @returns An object with the properties r, g, and b.
+ */
+export function HEX2RGBO(H) {
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(H);
+  let r = parseInt(result[1], 16);
+  let g = parseInt(result[2], 16);
+  let b = parseInt(result[3], 16);
+  return {
+    r,
+    g,
+    b
+  }
+}
 
 /**
  * It takes a hex color and returns an object with the hue, saturation, and lightness values
@@ -181,31 +246,8 @@ export function HEX2HSL(H) {
   let r = parseInt(result[1], 16);
   let g = parseInt(result[2], 16);
   let b = parseInt(result[3], 16);
-
-  r /= 255, g /= 255, b /= 255;
-
-  let max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h, s, l = (max + min) / 2;
-
-  if (max == min) {
-    h = s = 0; // achromatic
-  } else {
-    let d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
-    }
-
-    h /= 6;
-  }
-  return {
-    h,
-    s,
-    l
-  }
+  
+  return RGBO2HSL(r, g, b);
 }
 
 

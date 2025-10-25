@@ -5,25 +5,45 @@
   import TypographyControls from "./lib/controls/TypographyControls.svelte";
   import ExampleControls from "./lib/controls/ExampleControls.svelte";
   import Color from "./lib/color/Color";
+    import DefaultPreviewContent from './lib/controls/DefaultPreviewContent.svelte';
 
-  let primaryHSL = {
-    h: 0,
-    s: 0,
-    l: 0,
-  };
-  let secondaryHSL = {
-    h: 0,
-    s: 0,
-    l: 0,
-  };
+  let primaryHSL = { h: 0, s: 0, l: 0 };
+  let secondaryHSL = {h: 0,s: 0,l: 0};
+  let accentHSL = { h: 0, s: 0, l: 0 };
+  let lightHSL = { h: 0, s: 0, l: 0 };
+  let darkHSL = { h: 0, s: 0, l: 0 };
+  let successHSL = { h: 0, s: 0, l: 0 };
+  let dangerHSL = { h: 0, s: 0, l: 0 };
+  let warningHSL = { h: 0, s: 0, l: 0 };
+  let infoHSL = { h: 0, s: 0, l: 0 };
+  let textSuccessHSL = { h: 0, s: 0, l: 0 };
+  let textDangerHSL = { h: 0, s: 0, l: 0 };
+  let textWarningHSL = { h: 0, s: 0, l: 0 };
+  let textInfoHSL = { h: 0, s: 0, l: 0 };
+
+  // Semantic hues and bounds mirrored from ColorInputs.svelte
+  const minS = 60;
+  const maxS = 100;
+  const minL = 10;
+  const maxL = 90;
+
   $: textColorHSL = Color.Util.getTextColorFor(primaryHSL);
 
   colors.subscribe((colorsObj) => {
-    const primary = colorsObj.primary;
-    primaryHSL = primary;
-
-    const secondary = colorsObj.secondary;
-    secondaryHSL = secondary;
+    primaryHSL = colorsObj.primary;
+    secondaryHSL = colorsObj.secondary;
+    accentHSL = colorsObj.accent;
+    lightHSL = colorsObj.light;
+    darkHSL = colorsObj.dark;
+    successHSL = colorsObj.success;
+    dangerHSL = colorsObj.danger;
+    warningHSL = colorsObj.warning;
+    infoHSL = colorsObj.info;
+    
+    textSuccessHSL = Color.Util.getTextColorFor(successHSL, 35);
+    textDangerHSL = Color.Util.getTextColorFor(dangerHSL, 35);
+    textWarningHSL = Color.Util.getTextColorFor(warningHSL, 35);
+    textInfoHSL = Color.Util.getTextColorFor(infoHSL, 35);
   });
 </script>
 
@@ -33,6 +53,17 @@
   style:--primary-color={`hsl(${primaryHSL.h}, ${primaryHSL.s}%, ${primaryHSL.l}%)`}
   style:--palette-color-1={`${secondaryHSL.h}, ${secondaryHSL.s}%, ${secondaryHSL.l}%`}
   style:--secondary-color={`hsl(${secondaryHSL.h}, ${secondaryHSL.s}%, ${secondaryHSL.l}%)`}
+  style:--accent-color={`hsl(${accentHSL.h}, ${accentHSL.s}%, ${accentHSL.l}%)`}
+  style:--light-color={`hsl(${lightHSL.h}, ${lightHSL.s}%, ${lightHSL.l}%)`}
+  style:--dark-color={`hsl(${darkHSL.h}, ${darkHSL.s}%, ${darkHSL.l}%)`}
+  style:--success-color={`hsl(${successHSL.h}, ${successHSL.s}%, ${successHSL.l}%)`}
+  style:--danger-color={`hsl(${dangerHSL.h}, ${dangerHSL.s}%, ${dangerHSL.l}%)`}
+  style:--warning-color={`hsl(${warningHSL.h}, ${warningHSL.s}%, ${warningHSL.l}%)`}
+  style:--info-color={`hsl(${infoHSL.h}, ${infoHSL.s}%, ${infoHSL.l}%)`}
+  style:--text-success-color={`hsl(${textSuccessHSL.h}, ${textSuccessHSL.s}%, ${textSuccessHSL.l}%)`}
+  style:--text-danger-color={`hsl(${textDangerHSL.h}, ${textDangerHSL.s}%, ${textDangerHSL.l}%)`}
+  style:--text-warning-color={`hsl(${textWarningHSL.h}, ${textWarningHSL.s}%, ${textWarningHSL.l}%)`}
+  style:--text-info-color={`hsl(${textInfoHSL.h}, ${textInfoHSL.s}%, ${textInfoHSL.l}%)`}
   style:--background-color={`hsl(${primaryHSL.h}, ${primaryHSL.s}%, ${primaryHSL.l}%)`}
   style:--text-color={`hsl(${textColorHSL.h}, ${textColorHSL.s}%, ${textColorHSL.l}%)`}
 >
@@ -46,8 +77,9 @@
     {/if}
   </section>
   <section id="preview">
-    <PreviewControls />
-    <div id="preview__content" />
+    <PreviewControls>
+      <DefaultPreviewContent slot="preview-content" />
+    </PreviewControls>
   </section>
 </main>
 

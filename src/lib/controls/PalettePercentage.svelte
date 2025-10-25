@@ -3,33 +3,26 @@
   import Color from "../color/Color";
 
   let primaryHEX = "#000000";
-  let primaryTextHEX = "#000000";
+  let primaryTextHEX = "#FFFFFF";
   let secondaryHEX = "#000000";
-  let secondaryTextHEX = "#000000";
+  let secondaryTextHEX = "#FFFFFF";
   let accentHEX = "#000000";
-  let accentTextHEX = "#000000";
+  let accentTextHEX = "#FFFFFF";
 
   colors.subscribe(colorsObj => {
-    const primary = colorsObj.primary;
-    const primaryText = Color.Util.getTextColorFor(primary);
-    const secondary = colorsObj.secondary;
-    const secondaryText = Color.Util.getTextColorFor(secondary);
-    const accent = colorsObj.accent;
-    const accentText = Color.Util.getTextColorFor(accent);
+    primaryHEX = Color.Converter.HSL2HEX(colorsObj.primary);
+    secondaryHEX = Color.Converter.HSL2HEX(colorsObj.secondary);
+    accentHEX = Color.Converter.HSL2HEX(colorsObj.accent);
 
-    primaryHEX = Color.Converter.HSL2HEX(primary.h, primary.s, primary.l);
-    secondaryHEX = Color.Converter.HSL2HEX(secondary.h, secondary.s, secondary.l);
-    accentHEX = Color.Converter.HSL2HEX(accent.h, accent.s, accent.l);
-
-    primaryTextHEX = Color.Converter.HSL2HEX(primaryText.h, primaryText.s, primaryText.l);
-    secondaryTextHEX = Color.Converter.HSL2HEX(secondaryText.h, secondaryText.s, secondaryText.l);
-    accentTextHEX = Color.Converter.HSL2HEX(accentText.h, accentText.s, accentText.l);
+    primaryTextHEX = Color.Converter.HSL2HEX(Color.Util.getTextColorFor(colorsObj.primary));
+    secondaryTextHEX = Color.Converter.HSL2HEX(Color.Util.getTextColorFor(colorsObj.secondary));
+    accentTextHEX = Color.Converter.HSL2HEX(Color.Util.getTextColorFor(colorsObj.accent));
   })
 </script>
 
 <section>
   <p class="note__text">
-    It is recommended to use colors in proportion 60/30/10
+    It is recommended to use colors in proportion <a href="https://medium.com/design-bootcamp/60-30-10-rule-how-to-choose-colors-for-your-ui-design-713b3d4c1445">60/30/10</a>
     (primary/secondary/accent accordingly)
   </p>
 

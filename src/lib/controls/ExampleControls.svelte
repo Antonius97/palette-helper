@@ -2,6 +2,6 @@
   import ControlsBase from "./ControlsBase.svelte";
 </script>
 
-<ControlsBase id="example-controls">
+<ControlsBase>
   <p class="controls__title">Example Controls</p>
 </ControlsBase>

@@ -27,10 +27,14 @@ export const activePalleteRule = writable(PALLETE_RULES?.GRADIENT);
 
 export const colors = writable({
   primary: {h: 0, s: 0, l: 97},
-  secondary: {h: 248, s: 83, l: 46},
-  accent: {h: 348, s: 100, l: 53},
+  secondary: {h: 244, s: 100, l: 62},
+  accent: {h: 6, s: 98.6, l: 71},
   light: {h: 0, s: 0, l: 97},
-  dark: {h: 0, s: 0, l: 10}
+  dark: {h: 0, s: 0, l: 10},
+  success: {h: 133, s: 60, l: 80},
+  danger: {h: 331, s: 60, l: 80},
+  warning: {h: 53, s: 60, l: 80},
+  info: {h: 181, s: 60, l: 80}
 });
 
 export const paletteRefColor = writable({h: 248, s: 83, l: 46});

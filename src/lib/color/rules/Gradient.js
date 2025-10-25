@@ -27,8 +27,7 @@ export function generateColors(refColor, secondRefColor) {
 
   const outColors = [...Array(COLORS_NUM)].map((base, i) => {
     const colorRGBO = getMiddleColor(refRGBO, secondRefRGBO, i * NUM_COEF);
-    const colorHEX = Converter.RGBO2HEX(colorRGBO.r, colorRGBO.g, colorRGBO.b);
-    const colorHSL = Converter.HEX2HSL(colorHEX);
+    const colorHSL = Converter.RGBO2HSL(colorRGBO.r, colorRGBO.g, colorRGBO.b);
 
     return {
       description: `#${i + 1}`,

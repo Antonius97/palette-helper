@@ -27,6 +27,10 @@
   </button>
 </div>
 
+<div id="preview__content">
+  <slot name="preview-content"></slot>
+</div>
+
 <style>
   #preview__controls {
     display: flex;

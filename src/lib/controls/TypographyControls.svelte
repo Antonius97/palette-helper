@@ -2,6 +2,6 @@
   import ControlsBase from "./ControlsBase.svelte";
 </script>
 
-<ControlsBase id="typography-controls">
+<ControlsBase>
   <p class="controls__title">Typography Controls</p>
 </ControlsBase>

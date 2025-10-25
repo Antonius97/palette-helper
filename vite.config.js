@@ -11,7 +11,7 @@ export default defineConfig({
     allowedHosts
   },
   preview: {
-    host: allowedHosts[0],
+    host: "0.0.0.0",
     port,
     allowedHosts
   }

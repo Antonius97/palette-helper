@@ -224,7 +224,7 @@
 		margin-left: 1rem;
 		opacity: 0.9;
 	}
-  .nav :not(.btn--solid) {
+  .nav :not(.btn--solid):not(.btn--accent) {
     color: var(--text-color);
   }
 	.nav a:hover { opacity: 1; }

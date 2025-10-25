@@ -41,13 +41,12 @@
     font-weight: 400;
     border: 2px solid hsla(var(--palette-color-1), 10%);
     color: var(--secondary-color);
-    background-color: var(--background-color);
+    background-color: hsl(0, 0%, 97%);
     box-shadow: 0 0.5rem 1rem 0 hsla(var(--palette-color-1), 5%);
     transition: color 0.15s, background-color 0.15s;
   }
 
   .palette-rules__item.active {
-    /* color: var(--background-color); */
     background-color: hsla(var(--palette-color-1), 20%);
   }
 </style>

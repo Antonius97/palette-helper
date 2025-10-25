@@ -35,7 +35,7 @@
     font-weight: 400;
     border: 2px solid var(--secondary-color);
     color: var(--secondary-color);
-    background-color: var(--background-color);
+    background-color: hsl(0, 0%, 97%);
     transition: color 0.15s, background-color 0.15s;
   }
 
@@ -44,7 +44,7 @@
   }
 
   .color-model-switch__button.active {
-    color: var(--background-color);
+    color: hsl(0, 0%, 97%);
     background-color: var(--secondary-color);
   }
 </style>

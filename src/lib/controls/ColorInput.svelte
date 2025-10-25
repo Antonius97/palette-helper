@@ -139,7 +139,7 @@
     font-size: var(--h4-size);
     font-weight: 100;
     letter-spacing: 0.3px;
-    color: var(--text-color);
+    color: hsl(0, 0%, 10%);
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
@@ -151,8 +151,8 @@
     font-size: var(--text-size);
     font-weight: 100;
     letter-spacing: 0.3px;
-    color: var(--background-color);
-    background-color: var(--secondary-color);
+    color: hsl(0, 0%, 97%);
+    background-color: hsl(244, 100%, 62%);
     margin-left: 0.5rem;
     padding: 0.25rem 0.5rem;
     border-radius: 2rem;
@@ -194,8 +194,8 @@
     font-size: calc(var(--text-size) * 0.9);
     font-weight: 100;
     letter-spacing: 0.3px;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    color: hsl(0, 0%, 10%);
+    background-color: hsl(0, 0%, 97%);
     transition: background-color 0.15s, color 0.15s;
   }
 

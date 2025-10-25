@@ -59,13 +59,13 @@
     padding: 0.8rem;
     border:  none;
     outline: none;
-    color: var(--background-color);
+    color: hsl(0, 0%, 97%);
     background-color: var(--secondary-color);
     transition: background-color 0.15s, color 0.15s;
   }
 
   .preview__control.active {
-    background-color: var(--background-color);
+    background-color: hsl(0, 0%, 97%);
     color: var(--secondary-color);
   }
 </style>

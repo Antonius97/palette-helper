@@ -91,8 +91,8 @@
     align-items: flex-start;
     width: 100%;
     min-height: 100%;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: hsl(0, 0%, 97%);
+    color: hsl(0, 0%, 10%);
   }
 
   #controls,
@@ -116,9 +116,5 @@
     justify-content: start;
     align-items: flex-start;
     flex: 1 1 50%;
-  }
-
-  #preview__content {
-    height: calc(100% - 6.125rem);
   }
 </style>
